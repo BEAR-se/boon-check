@@ -1,28 +1,82 @@
-# Node modules
-node_modules/
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
 
-# Environment variables
+# Virtual Environment
+venv/
+ENV/
+env/
 .env
+.venv
+env.bak/
+venv.bak/
+
+# Flask
+instance/
+.webassets-cache
+flask_session/
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.sublime-workspace
+*.sublime-project
 
 # Logs
 *.log
+logs/
+log/
 
-# OS generated files
-.DS_Store
-Thumbs.db
+# Database
+*.db
+*.sqlite3
 
-# Uploaded files
-backend/uploads/*
-!backend/uploads/.gitkeep
+# Coverage reports
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
 
-# Build files
-dist/
-build/
+# Jupyter Notebook
+.ipynb_checkpoints
 
-# IDE files
-.vscode/
-.idea/
+# pyenv
+.python-version
 
-# Dependency lock files
-package-lock.json
-yarn.lock
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local development settings
+local_settings.py
