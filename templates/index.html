@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain Checker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Domain Checker</h1>
+        <div class="search-box">
+            <input type="text" id="domainInput" placeholder="Enter domain name (e.g., example.com)">
+            <button onclick="checkDomain()" id="checkButton">Check Availability</button>
+        </div>
+        <div id="result" class="result"></div>
+    </div>
+
+    <script>
+        async function checkDomain() {
+            const domain = document.getElementById('domainInput').value.trim();
+            const button = document.getElementById('checkButton');
+            const result = document.getElementById('result');
+
+            if (!domain) {
+                result.innerHTML = 'Please enter a domain name';
+                result.className = 'result error';
+                return;
+            }
+
+            try {
+                button.disabled = true;
+                button.innerHTML = 'Checking...';
+                result.innerHTML = '';
+
+                const response = await fetch('/check_domain', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ domain })
+                });
+
+                const data = await response.json();
+                
+                if (data.available) {
+                    result.innerHTML = `✨ ${domain} is available!`;
+                    result.className = 'result success';
+                } else {
+                    result.innerHTML = `😔 ${domain} is not available.`;
+                    result.className = 'result error';
+                }
+            } catch (error) {
+                result.innerHTML = 'Error checking domain availability';
+                result.className = 'result error';
+            } finally {
+                button.disabled = false;
+                button.innerHTML = 'Check Availability';
+            }
+        }
+
+        // Allow Enter key to trigger the check
+        document.getElementById('domainInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkDomain();
+            }
+        });
+    </script>
+</body>
+</html>
